@@ -6,9 +6,9 @@ using BSOD.ScriptableObjects.Enemies;
 
 public class MouseSelect : MonoBehaviour
 {
-    [SerializeField] RectTransform m_selection;
-    [SerializeField] EnemyRuntimeSet m_enemySet;
-    [SerializeField] EnemyRuntimeSet m_enemyToDestroySet;
+    [SerializeField] private RectTransform m_selection;
+    [SerializeField] private EnemyRuntimeSet m_enemySet;
+    [SerializeField] private EnemyRuntimeSet m_enemyToDestroySet;
 
     private Vector2 m_boxStart;
     private Vector2 m_boxEnd;
@@ -39,7 +39,7 @@ public class MouseSelect : MonoBehaviour
 
             m_boxStartRealWorld = Camera.main.ScreenToWorldPoint(m_boxStart);
             m_boxEndRealWorld = Camera.main.ScreenToWorldPoint(m_boxEnd);
-            m_boxSizeRealWorld = new Vector2(m_boxStartRealWorld.x - m_boxEndRealWorld.x, m_boxStartRealWorld.y - m_boxEndRealWorld.y);
+            m_boxSizeRealWorld = new Vector2(Mathf.Abs(m_boxStartRealWorld.x - m_boxEndRealWorld.x), Mathf.Abs(m_boxStartRealWorld.y - m_boxEndRealWorld.y));
 
             KillEnemies();
 
@@ -72,19 +72,17 @@ public class MouseSelect : MonoBehaviour
 
     private void KillEnemies()
     {
-        Rect rect = new Rect(m_boxStartRealWorld, m_boxSizeRealWorld); // Doesnt work yet
+        Vector2 BoxBottomLeftCorner = new Vector2(m_boxStartRealWorld.x < m_boxEndRealWorld.x ? m_boxStartRealWorld.x : m_boxEndRealWorld.x, m_boxStartRealWorld.y < m_boxEndRealWorld.y ? m_boxStartRealWorld.y : m_boxEndRealWorld.y);
+        Rect rect = new Rect(BoxBottomLeftCorner, m_boxSizeRealWorld);
         
-        foreach(Transform enemy in m_enemySet.Items)
+        for (int i = m_enemySet.Items.Count -1; i >= 0; i--)
         {
-            if (rect.Contains(enemy.position, true))
+            Transform enemy = m_enemySet.Items[i];
+            if (rect.Contains(enemy.position))
             {
-                print("Its a mtch!");
-                m_enemyToDestroySet.Add(enemy);
+                //m_enemyToDestroySet.Add(enemy);
+                Destroy(enemy.gameObject);
             }
-            
-
-        }
-        print(m_enemyToDestroySet.Items.Count);
-            
+        }            
     }
 }

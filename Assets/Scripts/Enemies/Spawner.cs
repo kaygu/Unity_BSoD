@@ -30,7 +30,7 @@ namespace BSOD.Enemies
 
         private void Spawn()
         {
-            Instantiate(m_enemy, new Vector3(Random.Range(-m_zoneWidth, m_zoneWidth), Random.Range(-m_zoneHeight, m_zoneHeight), 0), Quaternion.identity);
+            Instantiate(m_enemy, new Vector3(Random.Range(-m_zoneWidth, m_zoneWidth), Random.Range(-m_zoneHeight, m_zoneHeight), 0), Quaternion.identity, this.transform);
         }
     }
 }
