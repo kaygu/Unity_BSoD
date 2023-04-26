@@ -1,14 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 using BSOD.ScriptableObjects.Enemies;
+using BSOD.ScriptableObjects;
 
 public class MouseSelect : MonoBehaviour
 {
-    [SerializeField] private RectTransform m_selection;
     [SerializeField] private EnemyRuntimeSet m_enemySet;
     [SerializeField] private EnemyRuntimeSet m_enemyToDestroySet;
+    [Space]
+    [SerializeField] private RectTransform m_selection;
+    [Space]
+    [SerializeField] private GameEvent m_selectedEvent;
 
     private Vector2 m_boxStart;
     private Vector2 m_boxEnd;
@@ -18,11 +20,6 @@ public class MouseSelect : MonoBehaviour
     private Vector2 m_boxSizeRealWorld;
 
     private bool m_draggingMouse = false;
-   
-    void Start()
-    {
-        
-    }
 
    
     private void Update()
@@ -41,12 +38,14 @@ public class MouseSelect : MonoBehaviour
             m_boxEndRealWorld = Camera.main.ScreenToWorldPoint(m_boxEnd);
             m_boxSizeRealWorld = new Vector2(Mathf.Abs(m_boxStartRealWorld.x - m_boxEndRealWorld.x), Mathf.Abs(m_boxStartRealWorld.y - m_boxEndRealWorld.y));
 
-            KillEnemies();
-
+            EnemiesToKill();
 
             // Reset square
             m_boxStart = Vector2.zero;
             m_boxEnd = Vector2.zero;
+
+            // Raise Selected Event
+            m_selectedEvent.Raise();
         }
     }
 
@@ -70,7 +69,7 @@ public class MouseSelect : MonoBehaviour
         }
     }
 
-    private void KillEnemies()
+    private void EnemiesToKill()
     {
         Vector2 BoxBottomLeftCorner = new Vector2(m_boxStartRealWorld.x < m_boxEndRealWorld.x ? m_boxStartRealWorld.x : m_boxEndRealWorld.x, m_boxStartRealWorld.y < m_boxEndRealWorld.y ? m_boxStartRealWorld.y : m_boxEndRealWorld.y);
         Rect rect = new Rect(BoxBottomLeftCorner, m_boxSizeRealWorld);
@@ -80,9 +79,8 @@ public class MouseSelect : MonoBehaviour
             Transform enemy = m_enemySet.Items[i];
             if (rect.Contains(enemy.position))
             {
-                //m_enemyToDestroySet.Add(enemy);
-                Destroy(enemy.gameObject);
+                m_enemyToDestroySet.Add(enemy);
             }
-        }            
+        }
     }
 }

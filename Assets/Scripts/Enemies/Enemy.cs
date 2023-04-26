@@ -9,7 +9,7 @@ namespace BSOD.Enemies
     public class Enemy : MonoBehaviour
     {
         [SerializeField] private EnemyRuntimeSet m_enemySet;
-        [SerializeField] private EnemyRuntimeSet m_toDestroy;
+        [SerializeField] private EnemyRuntimeSet m_toDestroySet;
         private void OnEnable()
         {
             m_enemySet.Add(this.transform);
@@ -17,7 +17,7 @@ namespace BSOD.Enemies
 
         private void OnDisable()
         {
-            m_toDestroy.Remove(this.transform);
+            m_toDestroySet.Remove(this.transform);
             m_enemySet.Remove(this.transform);
         }
     }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 using BSOD.Events;
 
-namespace BSOD.ScriptableObjects.GameState
+namespace BSOD.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "GameEvent", menuName = "Events/Game Event")]
     public class GameEvent : ScriptableObject

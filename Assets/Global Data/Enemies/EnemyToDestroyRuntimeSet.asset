@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c254fc22e062b744d9a89b81573e4da5, type: 3}
-  m_Name: CharacterMovementStats
+  m_Script: {fileID: 11500000, guid: df6d80d94b0db86418a92200d8353994, type: 3}
+  m_Name: EnemyToDestroyRuntimeSet
   m_EditorClassIdentifier: 
-  Velocity: 750
-  DiagonalLimiter: 0.84
-  AccelerationSmoothness: 10
-  DecelerationSmoothness: 2
+  Items: []

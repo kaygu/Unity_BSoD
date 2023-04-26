@@ -98,4 +98,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemySet: {fileID: 11400000, guid: 5d2848eb5a241e54598a424653321976, type: 2}
-  m_toDestroy: {fileID: 11400000, guid: 9a41d6a5c35f61042b9ca1fddc7884c6, type: 2}
+  m_toDestroySet: {fileID: 11400000, guid: 9a41d6a5c35f61042b9ca1fddc7884c6, type: 2}

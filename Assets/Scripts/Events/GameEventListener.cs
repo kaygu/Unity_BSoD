@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-using BSOD.ScriptableObjects.GameState;
+using BSOD.ScriptableObjects;
 
 namespace BSOD.Events
 {

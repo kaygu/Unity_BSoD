@@ -232,7 +232,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1032133735
 GameObject:
@@ -422,6 +422,7 @@ GameObject:
   - component: {fileID: 1173491161}
   - component: {fileID: 1173491160}
   - component: {fileID: 1173491163}
+  - component: {fileID: 1173491164}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -511,6 +512,22 @@ MonoBehaviour:
   m_selection: {fileID: 1073970904}
   m_enemySet: {fileID: 11400000, guid: 5d2848eb5a241e54598a424653321976, type: 2}
   m_enemyToDestroySet: {fileID: 11400000, guid: 9a41d6a5c35f61042b9ca1fddc7884c6, type: 2}
+  m_selectedEvent: {fileID: 11400000, guid: 3b0bc85dc1c499b479bdeb628361108d, type: 2}
+--- !u!114 &1173491164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173491157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9907fe1c0b25b2a40aab71d103dac545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_event:
+    m_gameEvent: {fileID: 11400000, guid: 3b0bc85dc1c499b479bdeb628361108d, type: 2}
+  m_enemyHandler: {fileID: 1721681255}
 --- !u!1 &1253893066
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +657,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1721681254
 GameObject:
@@ -653,7 +670,7 @@ GameObject:
   - component: {fileID: 1721681256}
   - component: {fileID: 1721681255}
   m_Layer: 0
-  m_Name: SpawnEnemies
+  m_Name: Enemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -672,6 +689,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemy: {fileID: 7231495809243955533, guid: 388a6d05736baa645b94117e6e44fdaf, type: 3}
+  m_enemySet: {fileID: 11400000, guid: 5d2848eb5a241e54598a424653321976, type: 2}
+  m_toDestroySet: {fileID: 11400000, guid: 9a41d6a5c35f61042b9ca1fddc7884c6, type: 2}
 --- !u!4 &1721681256
 Transform:
   m_ObjectHideFlags: 0
@@ -770,7 +789,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1963297321
 MonoBehaviour:
