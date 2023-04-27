@@ -1,7 +1,7 @@
 using UnityEngine;
 
 using BSOD.ScriptableObjects.Enemies;
-using BSOD.ScriptableObjects;
+using BSOD.ScriptableObjects.Event;
 
 public class MouseSelect : MonoBehaviour
 {
@@ -45,7 +45,9 @@ public class MouseSelect : MonoBehaviour
             m_boxEnd = Vector2.zero;
 
             // Raise Selected Event
-            m_selectedEvent.Raise();
+            m_selectedEvent.Raise(); // Share timeout in selected event ?
+
+            // Count and propagate timeout
         }
     }
 

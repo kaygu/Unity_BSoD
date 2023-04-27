@@ -5,18 +5,18 @@ using BSOD.ScriptableObjects;
 
 namespace BSOD.UnityEditor
 {
-    [CustomEditor(typeof(GameEvent))]
+    [CustomEditor(typeof(GameEventBase))]
     public class GameEventEditor : Editor
     {
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
 
-            GameEvent myGameEvent = (GameEvent)target;
+            GameEventBase gameEvent = (GameEventBase)target;
 
             if (GUILayout.Button("Raise()", GUILayout.Height(75)))
             {
-                myGameEvent.Raise();
+                gameEvent.Raise();
             }
         }
     }
