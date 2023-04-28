@@ -1,12 +1,13 @@
 using UnityEngine;
 
+using BSOD.ScriptableObjects.Event;
 using BSOD.Enemies;
 
 namespace BSOD.Events.Player
 {
     public class SelectedEventHandler : MonoBehaviour
     {
-        [SerializeField] private CodedGameEventsListener m_event;
+        [SerializeField] private CodedGameEventsListener<float, FloatGameEvent> m_event;
         [SerializeField] private EnemyHandler m_enemyHandler;
 
         private void OnEnable()
@@ -19,9 +20,9 @@ namespace BSOD.Events.Player
             m_event?.OnDisable();
         }
 
-        public void OnSelectedEventRaised()
+        public void OnSelectedEventRaised(float v)
         {
-            Debug.Log("Selected");
+            Debug.Log("Selected: " +v);
             // Set time to next Selection here ? 
             m_enemyHandler.DestroyEnemies();
         }
