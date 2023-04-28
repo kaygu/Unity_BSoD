@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 using BSOD.ScriptableObjects.Enemies;
@@ -36,12 +37,14 @@ namespace BSOD.Enemies
             Instantiate(m_enemy, new Vector3(Random.Range(-m_zoneWidth, m_zoneWidth), Random.Range(-m_zoneHeight, m_zoneHeight), 0), Quaternion.identity, this.transform);
         }
 
-        public void DestroyEnemies()
+        public IEnumerator DestroyEnemies(float delay)
         {
+            delay /= m_toDestroySet.Items.Count;
             for (int i = m_toDestroySet.Items.Count - 1; i >= 0; i--)
             {
                 Transform enemy = m_toDestroySet.Items[i];
                 Destroy(enemy.gameObject);
+                yield return new WaitForSeconds(delay);
             }
         }
     }

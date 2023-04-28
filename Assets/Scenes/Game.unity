@@ -513,6 +513,7 @@ MonoBehaviour:
   m_enemyToDestroySet: {fileID: 11400000, guid: 9a41d6a5c35f61042b9ca1fddc7884c6, type: 2}
   m_selection: {fileID: 1073970904}
   m_selectedEvent: {fileID: 11400000, guid: d7b6e83a9e7baad4abd921859b7760a0, type: 2}
+  m_selectionCooldown: {fileID: 11400000, guid: d18f30f52f2ec1d4eb3ff30dc88cdc02, type: 2}
 --- !u!114 &1173491164
 MonoBehaviour:
   m_ObjectHideFlags: 0

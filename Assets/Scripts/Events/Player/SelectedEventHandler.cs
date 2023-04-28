@@ -24,7 +24,7 @@ namespace BSOD.Events.Player
         {
             Debug.Log("Selected: " +v);
             // Set time to next Selection here ? 
-            m_enemyHandler.DestroyEnemies();
+            StartCoroutine(m_enemyHandler.DestroyEnemies(v));
         }
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 
 using BSOD.ScriptableObjects.Enemies;
 using BSOD.ScriptableObjects.Event;
+using BSOD.ScriptableObjects.GameState;
 
 public class MouseSelect : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class MouseSelect : MonoBehaviour
     [Space]
     [SerializeField] private RectTransform m_selection;
     [Space]
-    [SerializeField] private GameEvent m_selectedEvent;
+    [SerializeField] private FloatGameEvent m_selectedEvent;
 
     private Vector2 m_boxStart;
     private Vector2 m_boxEnd;
@@ -21,33 +22,49 @@ public class MouseSelect : MonoBehaviour
 
     private bool m_draggingMouse = false;
 
-   
+    // Time Delay after Selection
+    [SerializeField] private SelectionCooldown m_selectionCooldown;
+
+    private float m_delay = 0f;
+
+
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (m_delay >= 0)
         {
-            m_boxStart = Input.mousePosition;
-            m_draggingMouse = true;
+            m_delay -= Time.deltaTime;
         }
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+        else
         {
-            m_draggingMouse = false;
-            m_boxEnd = Input.mousePosition;
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                m_boxStart = Input.mousePosition;
+                m_draggingMouse = true;
+            }
+            if (Input.GetKeyUp(KeyCode.Mouse0) && m_draggingMouse)
+            {
+                m_draggingMouse = false;
+                m_boxEnd = Input.mousePosition;
 
-            m_boxStartRealWorld = Camera.main.ScreenToWorldPoint(m_boxStart);
-            m_boxEndRealWorld = Camera.main.ScreenToWorldPoint(m_boxEnd);
-            m_boxSizeRealWorld = new Vector2(Mathf.Abs(m_boxStartRealWorld.x - m_boxEndRealWorld.x), Mathf.Abs(m_boxStartRealWorld.y - m_boxEndRealWorld.y));
+                m_boxStartRealWorld = Camera.main.ScreenToWorldPoint(m_boxStart);
+                m_boxEndRealWorld = Camera.main.ScreenToWorldPoint(m_boxEnd);
+                m_boxSizeRealWorld = new Vector2(Mathf.Abs(m_boxStartRealWorld.x - m_boxEndRealWorld.x), Mathf.Abs(m_boxStartRealWorld.y - m_boxEndRealWorld.y));
 
-            EnemiesToKill();
+                EnemiesToKill();
 
-            // Reset square
-            m_boxStart = Vector2.zero;
-            m_boxEnd = Vector2.zero;
+                // Reset square
+                m_boxStart = Vector2.zero;
+                m_boxEnd = Vector2.zero;
 
-            // Raise Selected Event
-            m_selectedEvent.Raise(); // Share timeout in selected event ?
+                // Calc Delay
+                m_delay = m_boxSizeRealWorld.x * m_boxSizeRealWorld.y * m_selectionCooldown.PerUnit;
+                if (m_delay < m_selectionCooldown.Minimum) m_delay = m_selectionCooldown.Minimum;
+                else if (m_delay > m_selectionCooldown.Maximum) m_delay = m_selectionCooldown.Maximum;
 
-            // Count and propagate timeout
+                // Raise Selected Event
+                m_selectedEvent.Raise(m_delay);
+            }
         }
     }
 

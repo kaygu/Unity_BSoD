@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace BSOD.ScriptableObjects.GameState
 {
-    [CreateAssetMenu(fileName = "GameScenes", menuName = "Game Scenes")]
+    [CreateAssetMenu(fileName = "GameScenes", menuName = "Game/Scenes")]
     public class GameScenes : ScriptableObject
     {
         public int StartScene = 0;
